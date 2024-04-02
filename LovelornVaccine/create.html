@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建立資料庫</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-900 text-white" href="#">失戀疫苗</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- me-auto:往右邊推 -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="homeManager.html">首頁</a>
+                  </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    設定
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="create.html">建立資料庫</a></li>                
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">其他</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    查詢
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="read-student.html">學生名單</a></li>
+                        <li><a class="dropdown-item" href="read-popular.html">得票數</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">其他</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      配對查詢
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="create-result.html">配對程序</a></li>
+                      <li><a class="dropdown-item" href="read-result.html">配對結果</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">其他</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">搜尋</button>
+            </form> -->
+          </div>
+        </div>
+      </nav>
+    <div class="container" style="margin-top: 7%;">        
+        <div class="row m-3">            
+            <div class="col-10 offset-1 p-3 rounded-3 shadow-lg border border-2 border-dark">
+                <div class="display-6 mb-3 text-primary">建立資料庫</div>
+                <div class="row">
+                    <p>1. 選擇excel</p>
+                    <div>
+                        <input type="file" id="excel-file">&nbsp;&nbsp;
+                        <label for="" id="file_state"></label>
+                    </div>
+                    
+                </div>
+                <div class="row mt-3">
+                    <p>2. 寫入資料庫學生表</p>
+                    <div>
+                        <button class="btn btn-success" id="student_btn">執行</button>&nbsp;&nbsp;
+                        <label for="" id="student_state"></label>
+                    </div>
+                    
+                </div>
+                <div class="row mt-3">
+                    <p>3. 寫入資料庫志願序及優點</p>
+                    <div>
+                        <button class="btn btn-success" id="active_btn">執行</button>
+                        <label for="" id="active_state"></label>
+                    </div>
+                </div> 
+                <div class="row mt-3">
+                    <p>4. 寫入資料庫被告白名單</p>
+                    <div>
+                        <button class="btn btn-success" id="passive_btn">執行</button>
+                        <label for="" id="passive_state"></label>
+                    </div>
+                </div> 
+                <div class="row mt-3">
+                    <p>5. 計算得票數</p>
+                    <div>
+                        <button class="btn btn-success" id="popular_btn">執行</button>
+                        <label for="" id="popular_state"></label>
+                    </div>
+                </div>                               
+            </div>
+        </div>        
+        <div class="row m-3">
+            <div class="col-10 offset-1 p-3 rounded-3 shadow-lg border border-2 border-dark">
+                <div class="display-6 mb-3 text-primary">清空資料表</div>
+                <div class="row">
+                    <div class="col-5 mb-3">
+                        <select name="clearTable" id="clearTable" class="form-select">
+                            <option selected disabled>請選擇資料表</option>
+                            <option value="1">學生表student</option>
+                            <option value="2">網站成員member</option>
+                            <option value="3">志願序active</option>
+                            <option value="4">得票數popular</option>
+                            <option value="5">被告白清單passive</option>
+                            <option value="6">配對結果result</option>
+                            <option value="99">全部表</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-success" id="clear_btn">執行</button>&nbsp;&nbsp;
+                        <label for="" id="clear_state"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/xlsx/0.11.5/xlsx.core.min.js"></script>
+    <script>
+        var student_flag = true;
+        var persons = []; // 存储获取到的数据       
+        $('#excel-file').change(function(e) {
+            $("#file_state").text("");
+            var files = e.target.files;
+            var fileReader = new FileReader();
+                fileReader.onload = function(ev) {
+                    try {
+                        var data = ev.target.result
+                        var workbook = XLSX.read(data, {
+                                type: 'binary'
+                            }) // 以二进制流方式读取得到整份excel表格对象
+                        //var persons = []; // 存储获取到的数据
+                    } catch (e) {
+                        console.log('文件类型不正确');
+                        return;
+                    }
+            
+                    // 表格的表格范围，可用于判断表头是否数量是否正确
+                    var fromTo = '';
+                    // 遍历每张表读取
+                    for (var sheet in workbook.Sheets) {
+                        if (workbook.Sheets.hasOwnProperty(sheet)) {
+                            fromTo = workbook.Sheets[sheet]['!ref'];
+                            console.log(fromTo);
+                            persons = persons.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
+                            // break; // 如果只取第一张表，就取消注释这行
+                        }
+                    }
+                    //在控制台打印出来表格中的数据
+                    console.log(persons);
+                    $("#file_state").text("成功");
+            };
+            // 以二进制方式打开文件
+            fileReader.readAsBinaryString(files[0]);
+        });
+
+        $("#student_btn").click(function(){
+            $("#student_state").text("");
+            persons.forEach(function(item){
+                console.log(item); 
+                if (student_flag === false ){
+                    return false;
+                }else{
+
+                    $.ajax({
+                        type:"POST",
+                        url:"create-student-api.php",
+                        data:JSON.stringify(item),
+                        dataType:"json",
+                        async: false,
+                        success:showdata_student,
+                        error:function(){
+                            //alert("error-create-api.php");
+                        }
+                    });               
+                }
+            });
+        });
+
+        $("#active_btn").click(function(){
+            $("#active_state").text("");
+            persons.forEach(function(item){
+                console.log(item);   
+                $.ajax({
+                    type:"POST",
+                    url:"create-active-api.php",
+                    data:JSON.stringify(item),
+                    dataType:"json",
+                    async: false,
+                    success:showdata_active,
+                    error:function(){
+                       // alert("error-create-active-api.php");
+                    }
+                });               
+            });
+        });
+
+        $("#passive_btn").click(function(){
+            $("#passive_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-passive-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#popular_btn").click(function(){
+            $("#popular_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-popular-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#clear_btn").click(function(){
+            // console.log($("#clearTable").val());
+            $.ajax({
+                type:"POST",
+                url:"delete-table-api.php",
+                data:{
+                    TableType:$("#clearTable").val()
+                },
+                success:function(msg){
+                    console.log(msg);
+                    $("#clear_state").text("成功");
+                },
+                error: function(){
+                    alert("error-delete-table-api.php");
+                }
+            });
+        });
+
+        $('#clearTable').bind("input propertychange", function(){
+                $("#clear_state").text("");
+            });
+
+        function showdata_student(data){
+            console.log(data);
+            alert(data.message);
+            if (data.state){
+                $("#student_state").text("成功");
+            }else{
+                student_flag = false;
+            }
+            
+        }
+
+        function showdata_active(data){
+            console.log(data);
+            alert(data.message);
+            $("#active_state").text("成功");
+        }
+
+    </script>
+</body>
+</html>

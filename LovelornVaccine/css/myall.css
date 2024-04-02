@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    /* 透明色 */
+    --mycolor001: rgba(0, 0, 0, .1);
+    --mycolor002: rgba(0, 0, 0, .2);
+    --mycolor003: rgba(0, 0, 0, .3);
+    --mycolor004: rgba(0, 0, 0, .4);
+    --mycolor005: rgba(0, 0, 0, .5);
+    /* 舒適溫和色 */
+    --mycolor01: #e1dcd9;
+    --mycolor02: #8f8681;
+    --mycolor03: #a67f78;
+    --mycolor04: #32435f;
+    /* 黑白 */
+    --mycolor05: white;
+    --mycolor06: black;
+    /* 寧靜溫和色 */
+    --mycolor07: #DCC1B0;
+    --mycolor08: #869DAB;
+    --mycolor09: #847072;
+    --mycolor10: #3D313F;
+    /* 亞麻溫和色-1 */
+    --mycolor11: #6C838B;
+    --mycolor12: #BB7748;
+    --mycolor13: #9E6D70;
+    --mycolor14: #7F726A;
+    /* 亞麻溫和色-2 */
+    --mycolor15: #d7cbbd;
+    --mycolor16: #c1893f;
+    --mycolor17: #af8f90;
+    --mycolor18: #69454f;
+    /* 柔和鮮豔色 */
+    --mycolor19: #ffd0d6;
+    --mycolor20: #b7dde0;
+    --mycolor21: #fee19f;
+    --mycolor22: #735b69;
+
+}
+
+body{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.fw-900{
+    font-weight: 900;
+}
+
+.fw-800{
+    font-weight: 800;
+}
+
+.fw-700{
+    font-weight: 700;
+}
+
+.fw-600{
+    font-weight: 600;
+}
+
+.fw-500{
+    font-weight: 500;
+}
+
+.fw-400{
+    font-weight: 400;
+}
+
+.fw-300{
+    font-weight: 300;
+}
+
+.fw-200{
+    font-weight: 200;
+}
+
+.fw-100{
+    font-weight: 100;
+}
+
+.mr-1{
+    margin-right: 1px;
+}
+
+.mr-2{
+    margin-right: 2px;
+}
+
+.mr-3{
+    margin-right: 3px;
+}
+
+.mr-4{
+    margin-right: 4px;
+}
+
+.mr-5{
+    margin-right: 5px;
+}
+
+.bg-cover{
+    background-position: center center;
+    background-size: cover;
+}

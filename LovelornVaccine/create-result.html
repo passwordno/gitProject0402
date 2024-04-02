@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配對程序</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-900 text-white" href="#">失戀疫苗</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- me-auto:往右邊推 -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="homeManager.html">首頁</a>
+                  </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    設定
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="create.html">建立資料庫</a></li>                
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">其他</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    查詢
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="read-student.html">學生名單</a></li>
+                        <li><a class="dropdown-item" href="read-popular.html">得票數</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">其他</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      配對查詢
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="create-result.html">配對程序</a></li>
+                      <li><a class="dropdown-item" href="read-result.html">配對結果</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">其他</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">搜尋</button>
+            </form> -->
+          </div>
+        </div>
+    </nav>
+    
+    <div class="container" style="margin-top: 7%;">        
+        <div class="row m-3">            
+            <div class="col-10 offset-1 p-3 rounded-3 shadow-lg border border-2 border-dark">
+                <div class="display-6 mb-3 text-primary">建立配對</div>
+                <div class="row">
+                    <p>1. 配對程序1(互相為第一志願者)</p>
+                    <div>
+                        <button class="btn btn-success" id="result-flag1_btn">執行</button>&nbsp;&nbsp;
+                        <label for="" id="result-flag1_state"></label>
+                    </div>
+                    
+                </div>
+                <div class="row mt-3">
+                    <p>2. 配對程序2(告白對象唯一)</p>
+                    <div>
+                        <button class="btn btn-success" id="result-flag2_btn">執行</button>
+                        <label for="" id="result-flag2_state"></label>
+                    </div>
+                </div> 
+                <div class="row mt-3">
+                    <p>3. 配對程序3(第一志願為跨班)</p>
+                    <div>
+                        <button class="btn btn-success" id="result-flag3_btn">執行</button>
+                        <label for="" id="result-flag3_state"></label>
+                    </div>
+                </div> 
+                <div class="row mt-3">
+                    <p>4. 配對程序4(剩最少告白者)</p>
+                    <div>
+                        <button class="btn btn-success" id="result-flag4_btn">執行</button>
+                        <label for="" id="result-flag4_state"></label>
+                    </div>
+                </div>                               
+                <div class="row mt-3">
+                    <p>5. 配對程序(一鍵完成)</p>
+                    <div>
+                        <button class="btn btn-success" id="result-flag5_btn">執行</button>
+                        <label for="" id="result-flag5_state"></label>
+                    </div>
+                </div>                               
+            </div>
+        </div>        
+        <div class="row m-3">
+            <div class="col-10 offset-1 p-3 rounded-3 shadow-lg border border-2 border-dark">
+                <div class="display-6 mb-3 text-primary">清空配對結果</div>
+                <div class="row">
+                    <!-- <div class="col-5 mb-3">
+                        <select name="clearTable" id="clearTable" class="form-select">
+                            <option selected disabled>請選擇資料表</option>
+                            <option value="6">配對結果result</option>
+                        </select>
+                    </div> -->
+                    <div class="col-4">
+                        <button class="btn btn-success" id="clear_btn">執行</button>&nbsp;&nbsp;
+                        <label for="" id="clear_state"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/xlsx/0.11.5/xlsx.core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+        $("#result-flag1_btn").click(function(){
+            $("#result-flag1_state").text("");    
+            $.ajax({
+                type:"GET",
+                url:"create-result-flag1-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                    $("#result-flag1_state").text("成功");
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#result-flag2_btn").click(function(){
+            $("#result-flag2_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-result-flag2-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                    $("#result-flag2_state").text("成功");
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+        
+        $("#result-flag3_btn").click(function(){
+            $("#result-flag3_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-result-flag3-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                    $("#result-flag3_state").text("成功");
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#result-flag4_btn").click(function(){
+            $("#result-flag4_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-result-flag4-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                    $("#result-flag4_state").text("成功");
+                    // $("#result-flag4_state").text(JSON.parse(msg).message);
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        // $("#result-flag5_btn").click(function(){
+        //     $("#result-flag5_state").text("");      
+        //     $.ajax({
+        //         type:"GET",
+        //         url:"create-result-flag5-api.php",
+        //         data:{},
+        //         success:function(msg){
+        //             console.log(msg);
+        //             $("#result-flag5_state").text("成功");
+        //             // $("#result-flag5_state").text(JSON.parse(msg).message);
+        //         },
+        //         error:function(){
+        //             // alert("error-create-active-api.php");
+        //         }
+        //     });                 
+        // });
+
+        $("#result-flag5_btn").click(function() {
+            $("#result-flag5_state").text(""); 
+
+            // 第一個請求
+            $.ajax({
+                type: "GET",
+                url: "create-result-flag1-api.php",
+                success: function(msg1) {
+                    console.log(msg1);
+                    $("#result-flag5_state").text("flag1 成功");
+
+                    // 第二個請求
+                    $.ajax({
+                        type: "GET",
+                        url: "create-result-flag2-api.php",
+                        success: function(msg2) {
+                            console.log(msg2);
+                            $("#result-flag5_state").text("flag2 成功");
+
+                            // 第三個請求
+                            $.ajax({
+                                type: "GET",
+                                url: "create-result-flag3-api.php",
+                                success: function(msg3) {
+                                    console.log(msg3);
+                                    $("#result-flag5_state").text("flag3 成功");
+
+                                    // 第四個請求
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "create-result-flag4-api.php",
+                                        success: function(msg4) {
+                                            console.log(msg4);
+                                            $("#result-flag5_state").text("成功");
+                                        },
+                                        error: function() {
+                                            // 第四個請求失敗
+                                            console.error("第四個 API 請求失敗");
+                                        }
+                                    });
+                                },
+                                error: function() {
+                                    // 第三個請求失敗
+                                    console.error("第三個 API 請求失敗");
+                                }
+                            });
+                        },
+                        error: function() {
+                            // 第二個請求失敗
+                            console.error("第二個 API 請求失敗");
+                        }
+                    });
+                },
+                error: function() {
+                    // 第一個請求失敗
+                    console.error("第一個 API 請求失敗");
+                }
+            });
+        });
+
+
+        // 清除配對結果資料表
+        $("#clear_btn").click(function(){
+            // console.log($("#clearTable").val());
+            Swal.fire({
+              title: "是否清除配對結果?",
+              showDenyButton: false,
+              showCancelButton: true,
+              confirmButtonText: "確認刪除",
+              denyButtonText: `Don't save`
+            }).then((result) => {
+              if (result.isConfirmed) {
+                $.ajax({
+                    type:"POST",
+                    url:"delete-table-api.php",
+                    data:{
+                        TableType: 6
+                    },
+                    success:function(msg){
+                        console.log(msg);
+                        $("#clear_state").text("成功");
+                    },
+                    error: function(){
+                        alert("error-delete-table-api.php");
+                    }
+                });
+                $.ajax({
+                    type:"GET",
+                    url:"update-repair-api.php",
+                    data:{},
+                    success:function(msg){
+                        console.log(msg);
+                    },
+                    error:function(){
+                        alert("error-update-repair-api.php");
+                    }
+                }); 
+                Swal.fire("清除配對結果成功!", "", "success");
+              }
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>讀取excel</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">    
+</head>
+<body>
+    <div class="container" style="margin-top: 5%;">
+        <div class="row py-5">
+            <div class="col-6 p-3 rounded-3 shadow-lg border border-2 border-dark">
+                    <div class="row">
+                        <p>1. 選擇excel</p>
+                        <input type="file" id="excel-file">
+                    </div>
+                    <div class="row mt-3">
+                        <p>2. 寫入資料庫學生表</p>
+                        <div>
+                            <button class="btn btn-success" id="student_btn">執行</button>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/xlsx/0.11.5/xlsx.core.min.js"></script>
+    <script>
+        var persons = []; // 存储获取到的数据       
+        $('#excel-file').change(function(e) {
+            var files = e.target.files;
+            var fileReader = new FileReader();
+                fileReader.onload = function(ev) {
+                    try {
+                        var data = ev.target.result
+                        var workbook = XLSX.read(data, {
+                                type: 'binary'
+                            }) // 以二进制流方式读取得到整份excel表格对象
+                        //var persons = []; // 存储获取到的数据
+                    } catch (e) {
+                        console.log('文件类型不正确');
+                        return;
+                    }
+            
+                    // 表格的表格范围，可用于判断表头是否数量是否正确
+                    var fromTo = '';
+                    // 遍历每张表读取
+                    for (var sheet in workbook.Sheets) {
+                        if (workbook.Sheets.hasOwnProperty(sheet)) {
+                            fromTo = workbook.Sheets[sheet]['!ref'];
+                            console.log(fromTo);
+                            persons = persons.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
+                            // break; // 如果只取第一张表，就取消注释这行
+                        }
+                    }
+                    //在控制台打印出来表格中的数据
+                    console.log(persons);
+                    //console.log(JSON.stringify(dataJSON));
+            };
+            // 以二进制方式打开文件
+            fileReader.readAsBinaryString(files[0]);
+        });
+
+        $("#student_btn").click(function(){
+
+           // var temp = 0;
+            persons.forEach(function(item){
+                console.log(item);   
+                $.ajax({
+                    type:"POST",
+                    url:"create-student-api.php",
+                    data:JSON.stringify(item),
+                    dataType:"json",
+                    async: false,
+                    success:showdata_studen,
+                    error:function(){
+                        //alert("error-create-api.php");
+                    }
+                });
+                //temp = 1;
+                
+            });
+
+        });
+
+        function showdata_studen(data){
+            console.log(data);
+           // alert(data.message);
+        }
+    </script>
+</body>
+</html>

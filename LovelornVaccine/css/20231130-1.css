@@ -1,0 +1,97 @@
+body {
+    background-color: var(--mycolor01);
+    padding-top: 15px;
+}
+
+.wrapper {
+    width: 1024px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav{
+    background-color:var(--mycolor02);
+    text-align: center;
+}
+
+nav ul{
+    display: inline-block;
+}
+
+nav ul li{
+    list-style-type: none;
+    float: left;
+}
+
+nav ul li a{
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+nav ul li a:hover{
+    background-color: rgb(226, 47, 23);
+}
+
+.content_in{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--mycolor03);
+    margin-top: 5px;
+}
+
+.content_in h1{
+    color: red;
+    text-align: center;
+}
+
+.content_in p{
+    font-size: 20px;
+    margin-bottom: 30px;            
+}
+
+.content_in a{
+    display: block;
+    width: 130px;
+    height: 40px;        
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--mycolor04);
+    text-decoration: none;
+    color:black;
+    text-align: center;
+    line-height: 40px;
+}
+
+.content_in a:hover{
+    color: white;
+    background-color: red;
+}
+
+.footer{
+    background-color: var(--mycolor05);
+    text-align: center;
+}
+
+.footer p{
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media screen and (max-width:1024px) {
+    .wrapper{
+        width: 100%;
+    }
+}
