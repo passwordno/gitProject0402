@@ -3,9 +3,9 @@
 
 > 可提供 1~3 張圖片，讓觀看者透過 README 了解整體畫面
 
-![範例圖片 1](https://github.com/passwordno/gitProject0402/blob/main/img/20180612%20%E5%A4%B1%E6%88%80%E7%96%AB%E8%8B%97%E6%B4%BB%E5%8B%95-2_180615_0298.jpg)
-![範例圖片 2](https://fakeimg.pl/500/)
-![範例圖片 3](https://fakeimg.pl/500/)
+![範例圖片 1](https://github.com/passwordno/gitProject0402/blob/main/img_readme/M-01-R-1.png)
+![範例圖片 2](https://github.com/passwordno/gitProject0402/blob/main/img_readme/M-6-4-2.png)
+![範例圖片 3](https://github.com/passwordno/gitProject0402/blob/main/img_readme/M-6-4-3.png)
 
 ## 專案技術
 
